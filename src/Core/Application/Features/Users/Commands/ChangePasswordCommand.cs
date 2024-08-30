@@ -47,7 +47,7 @@ namespace Application.Features.Users.Commands
                 }
                 if (!PasswordHelper.VerifyHash(request.CurrentPassword, user.PasswordHash, user.PasswordSalt))
                 {
-                    throw new ApiException(400, Messages.CurrentPasswordIsFalse);
+                    return new ErrorResponse(400, Messages.PasswordDontMatchWithConfirmation);
                 }
 
                 var (passwordHash, passwordSalt) = PasswordHelper.CreateHash(request.NewPassword);
